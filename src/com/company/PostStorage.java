@@ -7,6 +7,7 @@ class PostStorage {
     private Post[] postsArray = new Post[10];
     int size = 0;
 
+
     void add(Post post) {
         if (size == postsArray.length) {
             extend();
