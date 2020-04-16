@@ -62,7 +62,7 @@ public class Blog implements Commands {
         try {
             storage.printPostsByCategory(category);
         } catch (PostNotFoundException e) {
-            System.out.println("there is not that kind of category");
+            System.out.println("there is not post with that category");
         }
     }
 
