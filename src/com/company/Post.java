@@ -1,25 +1,39 @@
 package com.company;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class Post {
 
-    public Post(String title, String text, String category) {
+    public Post(String title, String text, Category category) {
         this.title = title;
         this.text = text;
-        this.category = category;
+        postCategory = category;
     }
 
     private String title;
     private String text;
-    private String category;
+    private Category postCategory;
     private Date createDate = new Date();
 
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setPostCategory(String category) {
+
+        try {
+            this.postCategory = Category.valueOf(category);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            System.out.println("there is not post category like"
+                    + " \" " + category + " \" " + "\n"
+                    + "maybe the problem is in uppercase or lowercase" );
+        }
+
     }
+
+    public void setPostCategory(Category category) {
+        this.postCategory = category;
+    }
+
+
 
     public void setText(String text) {
         this.text = text;
@@ -33,8 +47,12 @@ public class Post {
         return createDate;
     }
 
-    public String getCategory() {
-        return category;
+    public Category getCategory() {
+        return postCategory;
+    }
+
+    public String getCategoryAsString() {
+        return postCategory.toString();
     }
 
     public String getText() {
@@ -51,7 +69,7 @@ public class Post {
         return "Post{" +
                 "title='" + title + '\'' +
                 ", text='" + text + '\'' +
-                ", category='" + category + '\'' +
+                ", category='" + postCategory + '\'' +
                 ", createDate=" + createDate +
                 '}';
     }
