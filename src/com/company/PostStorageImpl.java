@@ -41,7 +41,6 @@ class PostStorageImpl implements PostStorage {
      կամ տեքստ-ի։(String-ը ունի contains մեթոդը, իրանով երեք)
      */
     public void searchPostsByKeyword(String keyword) throws PostNotFoundException {
-        System.out.println("method  for keyword");
 
         boolean anyPostFound = false;
 
@@ -81,6 +80,7 @@ class PostStorageImpl implements PostStorage {
     տպում է գրառումները ըստ կատեգորիայի
      */
     public void printPostsByCategory(Category category) throws PostNotFoundException {
+        if (isEmpty())throw new PostNotFoundException();
 
         boolean anyCategoryFound = false;
         for (int i = 0; i < size; i++) {

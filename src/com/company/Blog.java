@@ -9,10 +9,12 @@ public class Blog implements Commands {
 
     public static void main(String[] args) {
 
+        boolean isRegisteredUser = false;
+
         main:
         while (true) {
 
-            printCommands();
+            printCommands(isRegisteredUser);
             int command;
             try {
                 command = Integer.parseInt(scanner.next());
@@ -27,9 +29,15 @@ public class Blog implements Commands {
                     break main;
 
                 case ADD_POST:
-                    System.out.print("please enter 3  values for the new post you want to add\nand divide them by ','");
-                    addPost();
-                    break;
+                    if (isRegisteredUser){
+                        System.out.println("you have to lig in first for being able to add post ");
+                    }
+                    else {
+                        System.out.print("please enter 3  values for the new post you want to add\nand divide them by ','");
+                        addPost();
+                    }
+                    break ;
+
                 case SEARCH_POST:
                     System.out.print("Enter Keyword For Finding Posts");
                     search(scanner.next());
@@ -39,6 +47,12 @@ public class Blog implements Commands {
                     postsByCategory(scanner.next());
                     break;
                 case ALL_POSTS:
+                    storage.printAllPosts();
+                    break;
+                case LOG_IN:
+                    storage.printAllPosts();
+                    break;
+                case REGISTER:
                     storage.printAllPosts();
                     break;
 
@@ -89,16 +103,38 @@ public class Blog implements Commands {
         try {
             storage.searchPostsByKeyword(keyword);
         } catch (PostNotFoundException e) {
-            System.out.println("no posts found with given keyword");
+            System.out.println(e + " \n " + "no post found with given keyword");
         }
 
     }
 
-    private static void printCommands() {
-        System.out.println("please input " + EXIT + " for exit ");
-        System.out.println("please input " + ADD_POST + " for adding post");
-        System.out.println("please input " + SEARCH_POST + " for searching post");
-        System.out.println("please input " + POSTS_BY_CATEGORY + " for searching post by category");
-        System.out.println("please input " + ALL_POSTS + " for searching all posts");
+    private static void printCommands(boolean isRegisteredUser) {
+
+        if (isRegisteredUser) {
+            printCommandsForRegisteredUser();
+        } else {
+            printCommandsForNotRegisteredUser();
+        }
+
+    }
+
+    private static void printCommandsForRegisteredUser() {
+        System.out.println("please input 0 for exit ");
+        System.out.println("please input 1 for adding post");
+        System.out.println("please input 2 for searching post");
+        System.out.println("please input 3 for searching post by category");
+        System.out.println("please input 4 for searching all posts");
+        System.out.println("please input 6 for log out");
+
+    }
+
+    private static void printCommandsForNotRegisteredUser() {
+        System.out.println("please input 0 for exit ");
+        //System.out.println("please input 1 for adding post");
+        System.out.println("please input 2 for searching post");
+        System.out.println("please input 3 for searching post by category");
+        System.out.println("please input 4 for searching all posts");
+        System.out.println("please input 5 for log in");
+        System.out.println("please input 7 for register");
     }
 }
