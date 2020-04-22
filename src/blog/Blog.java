@@ -56,17 +56,25 @@ public class Blog implements Commands {
                     break;
 
 
-                case LOG_IN:
-                    logIn();
-                    break;
+                
                 case REGISTER:
                     register();
                     break;
+                    
+                case DELETE_PROFILE:
+                    deleteProfilr();
+                    break ;
+                    
+                 case LOG_IN:
+                    logIn();
+                    break;
+                    
                 case LOG_OUT:
                     logOut();
                     break;
+                    
                 case EDIT_PROFILE:
-                    edit();
+                    editProfile();
                     break;
 
                 default:
